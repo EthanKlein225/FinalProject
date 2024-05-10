@@ -125,3 +125,4 @@ C:\Users\ezero\CIDM 3312\FinalProject\obj\Debug\net8.0\refint\FinalProject.dll
 C:\Users\ezero\CIDM 3312\FinalProject\obj\Debug\net8.0\FinalProject.pdb
 C:\Users\ezero\CIDM 3312\FinalProject\obj\Debug\net8.0\FinalProject.genruntimeconfig.cache
 C:\Users\ezero\CIDM 3312\FinalProject\obj\Debug\net8.0\ref\FinalProject.dll
+C:\Users\ezero\CIDM 3312\FinalProject\obj\Debug\net8.0\FinalProject.sourcelink.json
