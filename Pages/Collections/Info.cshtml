@@ -1,0 +1,52 @@
+@page
+@model FinalProject.Pages.Collections.InfoModel
+
+@{
+    ViewData["Title"] = "Collector Info";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Collector</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Collection.Username)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Collection.Username)
+        </dd>
+        <ul>
+            @foreach(var game in Model.Collection.GameCollections!)
+            {
+                <form method="post">
+                    <input type="hidden" asp-for="GameToDelete" value="@game.Game.GameId" />
+                <li>
+                    @game.Game.GameName <input type="submit" Value="Remove" class="btn btn-danger btn-sm my-1" asp-page-handler="DeleteGame" asp-route-id="@Model.Collection.CollectionId">
+                </li>
+                </form>
+            }
+        </ul>        
+    </dl>
+    <div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" asp-for="Collection.CollectionId" />
+            <div class="form-group">
+                <select asp-items="Model.GamesDropDown" asp-for="GameToAdd" class="form-control">
+                    <option value="">Select a Game to Add</option>
+                </select>
+                <span asp-validation-for="GameToAdd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add Game" class="btn btn-primary" asp-page-handler="" asp-route-id="@Model.Collection.CollectionId"/>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Collection?.CollectionId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

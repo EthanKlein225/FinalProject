@@ -1,0 +1,66 @@
+@page
+@model FinalProject.Pages.Collections.IndexCollectionsModel
+
+@{
+    ViewData["Title"] = "Collectors";
+}
+
+<h1>Collectors</h1>
+
+<p>
+    <a asp-page="Create">Create New Collector</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @{
+                    var firstSort = "first_asc";
+                    if (Model.CurrentSort == "first_asc"){
+                        firstSort = "first_desc";
+                    }
+                }
+                <a asp-page="./Index" asp-route-CurrentSort="@firstSort">@Html.DisplayNameFor(model => model.Collection[0].Username)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Collection) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+            @foreach (var game in item.GameCollections!)
+            {
+                @game.Game.GameName <br />
+            }
+            @if (item.GameCollections.Count == 0)
+            {
+                @:0 Games, Try adding one!
+            }                  
+            </td>
+            <td>
+                <a asp-page="./Info" asp-route-id="@item.CollectionId">Info</a> |
+                <a asp-page="./Edit" asp-route-id="@item.CollectionId">Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@item.CollectionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<hr />
+
+@{
+    var prevDisabled="";
+    if (Model.PageNum <= 1){
+        prevDisabled = "disabled";
+    }
+}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item" @prevDisabled><a class="page-link" asp-page="./Index" asp-route-PageNum="@(Model.PageNum - 1)">Previous</a></li>
+    <li class="page-item"><a class="page-link" asp-page="./Index" asp-route-PageNum="@(Model.PageNum + 1)">Next</a></li>
+  </ul>
+</nav>
